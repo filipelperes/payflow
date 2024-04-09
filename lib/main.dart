@@ -16,7 +16,7 @@ class AppFirebase extends StatefulWidget {
 
 class _AppFirebaseState extends State<AppFirebase> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp(
-    options: FirebaseOptions(
+    options: const FirebaseOptions(
       apiKey: 'AIzaSyCuhk_2dyM2fRS0CKbLAiUotqinCAtYCU8',
       appId: '1:1076746096246:android:62a25f0408c49653d45957',
       messagingSenderId: '1076746096246',
@@ -39,7 +39,7 @@ class _AppFirebaseState extends State<AppFirebase> {
             ),
           );
         } else if (snapshot.connectionState == ConnectionState.done) {
-          return const AppWidget();
+          return AppWidget();
         } else {
           return const Material(
             child: Center(
