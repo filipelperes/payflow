@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:payflow/shared/models/user_model.dart';
 
 import 'modules/insert_boleto/insert_boleto_page.dart';
 import 'modules/barcode_scanner/barcode_scanner_page.dart';
@@ -30,10 +31,13 @@ class AppWidget extends StatelessWidget {
         initialRoute: "/splash",
         routes: {
           "/splash": (context) => const SplashPage(),
-          "/home": (context) => const HomePage(),
+          "/home": (context) => HomePage(
+              user: ModalRoute.of(context)!.settings.arguments as UserModel),
           "/login": (context) => const LoginPage(),
           "/barcode_scanner": (context) => const BarcodeScannerPage(),
-          "/insert_boleto": (context) => const InsertBoletoPage(),
+          "/insert_boleto": (context) => InsertBoletoPage(
+                barcode: ModalRoute.of(context)?.settings.arguments.toString(),
+              ),
         });
   }
 }

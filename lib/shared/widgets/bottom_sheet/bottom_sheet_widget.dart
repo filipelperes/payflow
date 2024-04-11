@@ -5,18 +5,18 @@ import '../../themes/app_colors.dart';
 import '../../themes/app_text_styles.dart';
 
 class BottomSheetWidget extends StatelessWidget {
-  final String labelPrimary;
-  final VoidCallback onTapPrimary;
-  final String labelSecondary;
-  final VoidCallback onTapSecondary;
+  final String primaryLabel;
+  final VoidCallback primaryOnPressed;
+  final String secondaryLabel;
+  final VoidCallback secondaryOnPressed;
   final String title;
   final String subtitle;
   const BottomSheetWidget({
     super.key,
-    required this.labelPrimary,
-    required this.onTapPrimary,
-    required this.labelSecondary,
-    required this.onTapSecondary,
+    required this.primaryLabel,
+    required this.primaryOnPressed,
+    required this.secondaryLabel,
+    required this.secondaryOnPressed,
     required this.title,
     required this.subtitle,
   });
@@ -65,10 +65,10 @@ class BottomSheetWidget extends StatelessWidget {
                   ),
                   SetLabelButtons(
                     enablePrimaryColor: true,
-                    labelPrimary: labelPrimary,
-                    onTapPrimary: onTapPrimary,
-                    labelSecondary: labelSecondary,
-                    onTapSecondary: onTapSecondary,
+                    primaryLabel: primaryLabel,
+                    primaryOnPressed: primaryOnPressed,
+                    secondaryLabel: secondaryLabel,
+                    secondaryOnPressed: secondaryOnPressed,
                   ),
                   const SizedBox(height: 2),
                 ],

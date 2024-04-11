@@ -22,7 +22,11 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     controller.getAvailableCameras();
     controller.statusNotifier.addListener(() {
       if (controller.status.hasBarcode) {
-        Navigator.pushReplacementNamed(context, "/insert_boleto");
+        Navigator.pushReplacementNamed(
+          context,
+          "/insert_boleto",
+          arguments: controller.status.barcode,
+        );
       }
     });
 
@@ -50,7 +54,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                 if (status.showCamera) {
                   return Container(
                     color: Colors.blue,
-                    child: status.cameraController!.buildPreview(),
+                    child: controller.cameraController!.buildPreview(),
                   );
                 } else {
                   return Container();
@@ -92,12 +96,15 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   ],
                 ),
                 bottomNavigationBar: SetLabelButtons(
-                  labelPrimary: "Inserir código do boleto",
-                  onTapPrimary: () {
-                    controller.status = BarcodeScannerStatus.error("Error");
+                  primaryLabel: "Inserir código do boleto",
+                  primaryOnPressed: () {
+                    Navigator.pushReplacementNamed(
+                      context,
+                      "/insert_boleto",
+                    );
                   },
-                  labelSecondary: "Adicionar da galeria",
-                  onTapSecondary: controller.scanWithImagePicker,
+                  secondaryLabel: "Adicionar da galeria",
+                  secondaryOnPressed: controller.scanWithImagePicker,
                 )),
           ),
           ValueListenableBuilder<BarcodeScannerStatus>(
@@ -107,12 +114,17 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   return Align(
                       alignment: Alignment.bottomLeft,
                       child: BottomSheetWidget(
-                          labelPrimary: "Escanear novamente",
-                          onTapPrimary: () {
-                            controller.getAvailableCameras();
+                          primaryLabel: "Escanear novamente",
+                          primaryOnPressed: () {
+                            controller.scanWithCamera();
                           },
-                          labelSecondary: "Digitar código",
-                          onTapSecondary: () {},
+                          secondaryLabel: "Digitar código",
+                          secondaryOnPressed: () {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              "/insert_boleto",
+                            );
+                          },
                           title:
                               "Não foi possível identificar um código de barras.",
                           subtitle:
